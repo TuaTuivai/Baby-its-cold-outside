@@ -23,3 +23,19 @@ header{
 .search-bar{
     margin: 10px;
 }
+
+.center-container{
+    text-align: center;
+    font-size: larger;
+
+}
+
+.day-container{
+    background-color: cadetblue;
+    padding: 3%;
+    border: 12px solid #B22222;
+    border-radius: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    
+}
