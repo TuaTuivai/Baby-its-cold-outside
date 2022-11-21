@@ -1,2 +1,1 @@
-# Baby-its-cold-outside
-Weather API
+Weather API !
