@@ -51,8 +51,6 @@ function getForecastWeather (){
             data.list[27],
             data.list[35],
         ]
-
-        console.log(selectedData)
         // <div class="col m-1">
         //     <p>Temp: 10</p>
         //     <p>Humidity: 10</p>
@@ -87,10 +85,12 @@ function getForecastWeather (){
 function saveToStorage () {
     var cityName = inputBox.value;
 
-    searchHistory.push(cityName)
-
-    localStorage.setItem("cities", JSON.stringify(searchHistory));
+    if (!searchHistory.includes(cityName)) {
+        searchHistory.push(cityName);
+        localStorage.setItem("cities", JSON.stringify(searchHistory));
+    }
 }
+
 
 function createButtons () {
     container.innerHTML = "";
@@ -111,3 +111,11 @@ function searchCity () {
 
 searchBtn.addEventListener('click', searchCity);
 createButtons()
+
+
+container.addEventListener("click", function(event) {
+    if (event.target.nodeName === "BUTTON") {
+        inputBox.value = event.target.textContent;
+        searchCity();
+    }
+});
