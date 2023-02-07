@@ -35,14 +35,12 @@ function getCurrentWeather (){
 function getForecastWeather (){
     var cityName = inputBox.value
     var currentLink = 'https://api.openweathermap.org/data/2.5/forecast?q='+cityName+'&units=imperial&appid=e8aeba804c1545aeb1b9eb9fd7af69ff'
-   //  var currentLink = 'https://api.openweathermap.org/data/2.5/forecast?q='+cityName+'&appid=e8aeba804c1545aeb1b9eb9fd7af69ff'
 
     fetch(currentLink)
    .then(response => response.json())
    .then(function(data){
         row.innerHTML = ""
        console.log(data.list)
-        // 3, 11, 19, 27, 35
 
         var selectedData = [
             data.list[3],
@@ -50,12 +48,8 @@ function getForecastWeather (){
             data.list[19],
             data.list[27],
             data.list[35],
-        ]
-        // <div class="col m-1">
-        //     <p>Temp: 10</p>
-        //     <p>Humidity: 10</p>
-        //     <p> Wind Speed: 11</p>
-        // </div>
+        ];
+     
 
         for(i = 0; i < selectedData.length; i++) {
             var colDiv = document.createElement("div");
@@ -79,11 +73,13 @@ function getForecastWeather (){
             colDiv.append(timeH4, tempP, humidP, windP);
     
             row.append(colDiv)
-           }
+           };
            
            function addWeatherIcon(colDiv, selectedData) {
             var weather = selectedData.weather[0].main;
             var icon = document.createElement("i");
+            
+            
           
             switch(weather) {
               case "Clouds":
