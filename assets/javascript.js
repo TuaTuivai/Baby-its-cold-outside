@@ -57,31 +57,57 @@ function getForecastWeather (){
         //     <p> Wind Speed: 11</p>
         // </div>
 
-       for(i = 0; i < selectedData.length; i++) {
-        var colDiv = document.createElement("div");
-        colDiv.classList.add("col");
-        colDiv.classList.add("m-1");
-
-        var timeH4 = document.createElement("h4");
-            timeH4.textContent = dayjs(selectedData[i].dt * 1000).format("MM/DD");
-
-        var tempP = document.createElement("p");
-            tempP.textContent = 'Temp '+ selectedData[i].main.temp + ' degrees';
-
-        var humidP = document.createElement("p");
-            humidP.textContent  = 'Humidity ' + selectedData[i].main.humidity ;
-
-        var windP = document.createElement("p");
-            windP.textContent = 'Wind Speed '+ selectedData[i].wind.speed  + ' mph';
-
-        colDiv.append(timeH4, tempP, humidP, windP);
-
-        row.append(colDiv)
-       }
+        for(i = 0; i < selectedData.length; i++) {
+            var colDiv = document.createElement("div");
+            colDiv.classList.add("col");
+            colDiv.classList.add("m-1");
+            
+            addWeatherIcon(colDiv, selectedData[i]);
+    
+            var timeH4 = document.createElement("h4");
+                timeH4.textContent = dayjs(selectedData[i].dt * 1000).format("MM/DD");
+    
+            var tempP = document.createElement("p");
+                tempP.textContent = 'Temp '+ selectedData[i].main.temp + ' degrees';
+    
+            var humidP = document.createElement("p");
+                humidP.textContent  = 'Humidity ' + selectedData[i].main.humidity ;
+    
+            var windP = document.createElement("p");
+                windP.textContent = 'Wind Speed '+ selectedData[i].wind.speed  + ' mph';
+    
+            colDiv.append(timeH4, tempP, humidP, windP);
+    
+            row.append(colDiv)
+           }
+           
+           function addWeatherIcon(colDiv, selectedData) {
+            var weather = selectedData.weather[0].main;
+            var icon = document.createElement("i");
+          
+            switch(weather) {
+              case "Clouds":
+                icon.classList.add("fa", "fa-cloud");
+                break;
+              case "Sunny":
+                icon.classList.add("fa", "fa-sun");
+                break;
+              case "Rain":
+                icon.classList.add("fa", "fa-cloud-rain");
+                break;
+              case "Windy":
+                icon.classList.add("fa", "fa-wind");
+                break;
+              default:
+                icon.classList.add("fa", "fa-thermometer-half");
+            }
+          
+            colDiv.prepend(icon);
+          }
+          
         
    })
 };
-
 function saveToStorage () {
     var cityName = inputBox.value;
 
